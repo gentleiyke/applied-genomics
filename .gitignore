@@ -1,0 +1,34 @@
+# Raw and processed sequencing data
+data/raw/*
+data/trimmed/*
+
+# Reference files
+reference/genome/*
+reference/annotation/*
+reference/index/*
+
+# Alignment files
+alignment/sam/*
+alignment/bam/*
+
+# FastQC output folders
+qc/raw_fastqc/*
+qc/trimmed_fastqc/*
+
+# Large count outputs if needed
+*.bam
+*.sam
+*.fastq
+*.fq
+*.fastq.gz
+*.fq.gz
+*.fasta
+*.fa
+*.gtf
+*.gff
+
+# System files
+.DS_Store
+
+# Keep folder structure
+!.gitkeep
