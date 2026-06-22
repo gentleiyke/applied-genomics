@@ -26,9 +26,11 @@ qc/trimmed_fastqc/*
 *.fa
 *.gtf
 *.gff
+*.sra
 
 # System files
 .DS_Store
 
 # Keep folder structure
-!.gitkeep
+!data/raw/.gitkeep
+!data/trimmed/.gitkeep

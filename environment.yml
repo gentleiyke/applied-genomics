@@ -1,0 +1,9 @@
+name: rnaseq-qc
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - sra-tools
+  - fastqc
+  - fastp
+  - multiqc

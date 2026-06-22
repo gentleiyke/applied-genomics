@@ -1,0 +1,16 @@
+Module	Section	Sample Name	Source
+fastp	all_sections	SRR5364316	/Users/macbookpro/applied-genomics/qc/fastp/SRR5364316_fastp.json
+fastp	all_sections	SRR5364317	/Users/macbookpro/applied-genomics/qc/fastp/SRR5364317_fastp.json
+fastp	all_sections	SRR5364318	/Users/macbookpro/applied-genomics/qc/fastp/SRR5364318_fastp.json
+fastp	all_sections	SRR5364322	/Users/macbookpro/applied-genomics/qc/fastp/SRR5364322_fastp.json
+fastp	all_sections	SRR5364323	/Users/macbookpro/applied-genomics/qc/fastp/SRR5364323_fastp.json
+FastQC	all_sections	SRR5364316_1	/Users/macbookpro/applied-genomics/qc/raw_fastqc/SRR5364316_1_fastqc.zip
+FastQC	all_sections	SRR5364316_2	/Users/macbookpro/applied-genomics/qc/raw_fastqc/SRR5364316_2_fastqc.zip
+FastQC	all_sections	SRR5364317_1	/Users/macbookpro/applied-genomics/qc/raw_fastqc/SRR5364317_1_fastqc.zip
+FastQC	all_sections	SRR5364317_2	/Users/macbookpro/applied-genomics/qc/raw_fastqc/SRR5364317_2_fastqc.zip
+FastQC	all_sections	SRR5364318_1	/Users/macbookpro/applied-genomics/qc/raw_fastqc/SRR5364318_1_fastqc.zip
+FastQC	all_sections	SRR5364318_2	/Users/macbookpro/applied-genomics/qc/raw_fastqc/SRR5364318_2_fastqc.zip
+FastQC	all_sections	SRR5364322_1	/Users/macbookpro/applied-genomics/qc/raw_fastqc/SRR5364322_1_fastqc.zip
+FastQC	all_sections	SRR5364322_2	/Users/macbookpro/applied-genomics/qc/raw_fastqc/SRR5364322_2_fastqc.zip
+FastQC	all_sections	SRR5364323_1	/Users/macbookpro/applied-genomics/qc/raw_fastqc/SRR5364323_1_fastqc.zip
+FastQC	all_sections	SRR5364323_2	/Users/macbookpro/applied-genomics/qc/raw_fastqc/SRR5364323_2_fastqc.zip
