@@ -24,3 +24,6 @@ The overall alignment rate for each sample is shown below.
 | SRR5364318 | 99.37% | PASS |
 | SRR5364322 | 99.38% | PASS |
 | SRR5364323 | 99.43% | PASS |
+
+## Read Counting
+Gene-level read counts were generated from the sorted BAM alignment files using featureCounts from the Subread package. Counts were assigned to exon features and summarised by Ensembl gene ID using the *Mus musculus* GRCm39 Ensembl release 116 GTF annotation. The final count matrix is saved in `counts/count_matrix.tsv`.
