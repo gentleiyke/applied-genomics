@@ -1,6 +1,7 @@
 # Raw and processed sequencing data
 data/raw/*
 data/trimmed/*
+data/sra/*
 
 # Reference files
 reference/genome/*
@@ -24,9 +25,13 @@ qc/trimmed_fastqc/*
 *.fq.gz
 *.fasta
 *.fa
+*.fa.gz
 *.gtf
 *.gff
 *.sra
+*.gtf.gz
+*.bai
+*.ht2
 
 # System files
 .DS_Store
@@ -34,3 +39,7 @@ qc/trimmed_fastqc/*
 # Keep folder structure
 !data/raw/.gitkeep
 !data/trimmed/.gitkeep
+!alignment/logs/
+!alignment/logs/*.log
+!alignment/logs/*.tsv
+!alignment/logs/*.md

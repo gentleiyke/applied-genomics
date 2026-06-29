@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
+shopt -s nullglob
 
 RAW_DIR="data/raw"
 TRIM_DIR="data/trimmed"
@@ -18,8 +19,8 @@ echo "======================================"
 echo "Step 1: Running FastQC on raw reads"
 echo "======================================"
 
-fastqc "$RAW_DIR"/*.fastq.gz 
-    --outdir "$RAW_QC_DIR" 
+fastqc "$RAW_DIR"/*.fastq.gz \
+    --outdir "$RAW_QC_DIR" \
     --threads "$THREADS"
 
 echo "Raw FastQC complete."
@@ -28,9 +29,14 @@ echo "======================================"
 echo "Step 2: Running fastp trimming"
 echo "======================================"
 
-for R1 in "${RAW_R1_FILES[@]}"; do
+for R1 in "$RAW_DIR"/*_1.fastq.gz; do
     SAMPLE=$(basename "$R1" _1.fastq.gz)
     R2="$RAW_DIR/${SAMPLE}_2.fastq.gz"
+
+    if [[ ! -f "$R2" ]]; then
+        echo "Warning: Missing R2 file for $SAMPLE. Skipping."
+        continue
+    fi
 
     echo "Processing $SAMPLE with fastp..."
 
@@ -41,7 +47,8 @@ for R1 in "${RAW_R1_FILES[@]}"; do
         -O "$TRIM_DIR/${SAMPLE}_2.trimmed.fastq.gz" \
         --detect_adapter_for_pe \
         --thread "$THREADS" \
-        --html "$FASTP_REPORT_DIR/${SAMPLE}_fastp.html" \
+        -z 9 \
+--html "$FASTP_REPORT_DIR/${SAMPLE}_fastp.html" \
         --json "$FASTP_REPORT_DIR/${SAMPLE}_fastp.json"
 done
 
@@ -51,8 +58,8 @@ echo "======================================"
 echo "Step 3: Running FastQC on trimmed reads"
 echo "======================================"
 
-fastqc "$TRIM_DIR"/*.fastq.gz 
-    --outdir "$TRIM_QC_DIR" 
+fastqc "$TRIM_DIR"/*.fastq.gz \
+    --outdir "$TRIM_QC_DIR" \
     --threads "$THREADS"
 
 echo "Trimmed FastQC complete."
@@ -61,9 +68,9 @@ echo "======================================"
 echo "Step 4: Running MultiQC"
 echo "======================================"
 
-multiqc qc 
-    --outdir "$MULTIQC_DIR" 
-    --filename multiqc_report.html 
+multiqc qc \
+    --outdir "$MULTIQC_DIR" \
+    --filename multiqc_report.html \
     --force
 
 echo "MultiQC report created at qc/multiqc/multiqc_report.html"

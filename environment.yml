@@ -7,3 +7,6 @@ dependencies:
   - fastqc
   - fastp
   - multiqc
+  - hisat2
+  - samtools
+  - wget

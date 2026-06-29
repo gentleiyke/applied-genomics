@@ -1,6 +1,6 @@
 {
 	"summary": {
-		"fastp_version": "1.3.4",
+		"fastp_version": "1.3.5",
 		"sequencing": "paired end (100 cycles + 100 cycles)",
 		"before_filtering": {
 			"total_reads":107264636,
@@ -413,5 +413,5 @@
 		"overrepresented_sequences": {
 		}
 	},
-	"command": "fastp -i data/raw/SRR5364322_1.fastq.gz -I data/raw/SRR5364322_2.fastq.gz -o data/trimmed/SRR5364322_1.trimmed.fastq.gz -O data/trimmed/SRR5364322_2.trimmed.fastq.gz --detect_adapter_for_pe --thread 4 --html qc/fastp/SRR5364322_fastp.html --json qc/fastp/SRR5364322_fastp.json "
+	"command": "fastp -i data/raw/SRR5364322_1.fastq.gz -I data/raw/SRR5364322_2.fastq.gz -o data/trimmed/SRR5364322_1.trimmed.fastq.gz -O data/trimmed/SRR5364322_2.trimmed.fastq.gz --detect_adapter_for_pe --thread 4 -z 9 --html qc/fastp/SRR5364322_fastp.html --json qc/fastp/SRR5364322_fastp.json "
 }
