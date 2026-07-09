@@ -27,3 +27,16 @@ The overall alignment rate for each sample is shown below.
 
 ## Read Counting
 Gene-level read counts were generated from the sorted BAM alignment files using featureCounts from the Subread package. Counts were assigned to exon features and summarised by Ensembl gene ID using the *Mus musculus* GRCm39 Ensembl release 116 GTF annotation. The final count matrix is saved in `counts/count_matrix.tsv`.
+
+## Differential Gene Expression Analysis
+
+Differential gene expression analysis was performed in R using DESeq2. Raw gene-level counts from `counts/count_matrix.tsv` were imported along with the sample metadata file `data/metadata/sample_info.tsv`. Low-count genes were filtered before running DESeq2. The comparison performed was `Day4_InfluenzaA_Cerebellum` versus `Day0_NonInfected_Cerebellum`.
+
+| Comparison | Total genes tested | Significant DEGs | Upregulated | Downregulated |
+|---|---:|---:|---:|---:|
+| Day4_InfluenzaA_Cerebellum vs Day0_NonInfected_Cerebellum | 19,911 | 2 | 2 | 0 |
+
+Significant DEGs were defined as genes with adjusted p-value < 0.05 and absolute log2 fold change >= 1. A total of 19,911 genes were tested, and 2 significant differentially expressed genes were identified. Both significant DEGs were upregulated in the Day 4 Influenza A cerebellum samples compared with the Day 0 non-infected cerebellum samples. No significant downregulated genes were detected.
+
+The dataset contains an unbalanced design with three Day 0 non-infected control samples and two Day 4 Influenza A-infected samples. All five samples were retained because DESeq2 can model unequal replicate numbers, but the smaller infected group may limit statistical power.
+
