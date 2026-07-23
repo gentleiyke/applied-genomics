@@ -13,7 +13,7 @@ RNA sequencing (RNA-seq) is a next-generation sequencing technique used to captu
 This project uses five publicly available RNA-seq samples from NCBI GEO/SRA study GSE96870, which investigated transcriptional changes in the central nervous system after upper-respiratory Influenza A infection. The selected samples are from mouse cerebellum and include non-infected Day 0 samples and Influenza A-infected Day 4 samples. The organism is *Mus musculus*. The sequencing type is transcriptomic RNA-seq using Illumina HiSeq 2500 paired-end reads. Raw reads were downloaded from SRA, quality checked with FastQC, trimmed with fastp where needed, and summarized using MultiQC.
 
 ## Reference Genome and Alignment
-Reads were aligned to the *Mus musculus* GRCm38 reference genome using HISAT2. Alignment was performed on trimmed paired-end FASTQ files, and SAM output was piped directly into sorted BAM files with samtools to reduce disk usage. 
+Reads were aligned to the *Mus musculus* GRCm39 reference genome using HISAT2. Alignment was performed on trimmed paired-end FASTQ files, and SAM output was piped directly into sorted BAM files with samtools to reduce disk usage. 
 
 The overall alignment rate for each sample is shown below.
 
