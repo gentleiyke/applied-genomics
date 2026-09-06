@@ -43,3 +43,5 @@ qc/trimmed_fastqc/*
 !alignment/logs/*.log
 !alignment/logs/*.tsv
 !alignment/logs/*.md
+.RData
+.Rhistory
