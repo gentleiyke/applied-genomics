@@ -1,42 +1,89 @@
-# Applied Genomics
+# Mouse Influenza RNA-seq Analysis
 
-## Name
-Ikemefula Oriaku
+A reproducible RNA-seq analysis of mouse cerebellum samples from NCBI GEO/SRA study **GSE96870**, comparing Day 4 Influenza A-infected samples with Day 0 non-infected controls.
 
-## Program Title
-RNA-seq Project Setup and Version Control
+## Overview
 
-## Project Description
-RNA sequencing (RNA-seq) is a next-generation sequencing technique used to capture and quantify RNA molecules in a biological sample. By providing a "snapshot" of the transcriptome at a given time, it reveals exactly which genes are active, how much they are transcribed, and helps identify alternative splicing and gene fusions
+Five *Mus musculus* cerebellum RNA-seq samples were analysed:
 
-## Dataset Description
-This project uses five publicly available RNA-seq samples from NCBI GEO/SRA study GSE96870, which investigated transcriptional changes in the central nervous system after upper-respiratory Influenza A infection. The selected samples are from mouse cerebellum and include non-infected Day 0 samples and Influenza A-infected Day 4 samples. The organism is *Mus musculus*. The sequencing type is transcriptomic RNA-seq using Illumina HiSeq 2500 paired-end reads. Raw reads were downloaded from SRA, quality checked with FastQC, trimmed with fastp where needed, and summarized using MultiQC.
+* 3 Day 0 non-infected controls
+* 2 Day 4 Influenza A-infected samples
 
-## Reference Genome and Alignment
-Reads were aligned to the *Mus musculus* GRCm39 reference genome using HISAT2. Alignment was performed on trimmed paired-end FASTQ files, and SAM output was piped directly into sorted BAM files with samtools to reduce disk usage. 
+The workflow covers:
 
-The overall alignment rate for each sample is shown below.
+`NCBI SRA → FastQC → fastp → MultiQC → HISAT2 → samtools → featureCounts → DESeq2`
 
-| SampleID | Overall alignment rate | Status |
-|---|---:|---|
-| SRR5364316 | 99.46% | PASS |
-| SRR5364317 | 99.43% | PASS |
-| SRR5364318 | 99.37% | PASS |
-| SRR5364322 | 99.38% | PASS |
-| SRR5364323 | 99.43% | PASS |
+Reads were mapped to the *Mus musculus* **GRCm39** reference genome and quantified using the Ensembl release 116 GTF annotation.
 
-## Read Counting
-Gene-level read counts were generated from the sorted BAM alignment files using featureCounts from the Subread package. Counts were assigned to exon features and summarised by Ensembl gene ID using the *Mus musculus* GRCm39 Ensembl release 116 GTF annotation. The final count matrix is saved in `counts/count_matrix.tsv`.
+## Key Results
 
-## Differential Gene Expression Analysis
+All five samples achieved HISAT2 overall alignment rates between **99.37% and 99.46%**.
 
-Differential gene expression analysis was performed in R using DESeq2. Raw gene-level counts from `counts/count_matrix.tsv` were imported along with the sample metadata file `data/metadata/sample_info.tsv`. Low-count genes were filtered before running DESeq2. The comparison performed was `Day4_InfluenzaA_Cerebellum` versus `Day0_NonInfected_Cerebellum`.
+DESeq2 differential-expression analysis compared:
 
-| Comparison | Total genes tested | Significant DEGs | Upregulated | Downregulated |
-|---|---:|---:|---:|---:|
-| Day4_InfluenzaA_Cerebellum vs Day0_NonInfected_Cerebellum | 19,911 | 2 | 2 | 0 |
+`Day4_InfluenzaA_Cerebellum` vs `Day0_NonInfected_Cerebellum`
 
-Significant DEGs were defined as genes with adjusted p-value < 0.05 and absolute log2 fold change >= 1. A total of 19,911 genes were tested, and 2 significant differentially expressed genes were identified. Both significant DEGs were upregulated in the Day 4 Influenza A cerebellum samples compared with the Day 0 non-infected cerebellum samples. No significant downregulated genes were detected.
+| Metric           | Result |
+| ---------------- | -----: |
+| Genes tested     | 19,911 |
+| Significant DEGs |      2 |
+| Upregulated      |      2 |
+| Downregulated    |      0 |
 
-The dataset contains an unbalanced design with three Day 0 non-infected control samples and two Day 4 Influenza A-infected samples. All five samples were retained because DESeq2 can model unequal replicate numbers, but the smaller infected group may limit statistical power.
+Significant DEGs were defined using an adjusted p-value < 0.05 and an absolute log2 fold change >= 1.
 
+## Workflow Structure
+
+```text
+mouse-influenza-rnaseq-analysis/
+├── data/metadata/           # Sample metadata and SRA accessions
+├── scripts/                 # Reproducible Bash and R workflows
+├── qc/                      # FastQC, fastp and MultiQC outputs
+├── alignment/logs/          # HISAT2 alignment logs and rates
+├── counts/                  # featureCounts output and count matrix
+├── results/deseq2/          # DESeq2 tables and figures
+├── report/                  # Full analysis report
+├── environment.yml          # Reproducible Conda environment
+└── README.md
+```
+
+## Full Analysis Report
+
+A detailed report containing the methods, results, interpretation, limitations and figures is available here:
+
+[RNA-seq Analysis Report](report/RNAseq_analysis_report.md)
+
+## Tools
+
+* NCBI SRA Toolkit
+* Conda / Bioconda / conda-forge
+* FastQC
+* fastp
+* MultiQC
+* HISAT2
+* samtools
+* featureCounts / Subread
+* R
+* DESeq2
+* Git / GitHub
+* Bash / Unix command line
+* Ensembl GRCm39 release 116
+
+## Reproducibility
+
+The analysis scripts are numbered in workflow order:
+
+```text
+01_download_data.sh
+02_quality_control.sh
+03_build_index.sh
+04_alignment.sh
+05_featurecounts.sh
+06_deseq2_analysis.R
+```
+
+Large sequencing files, BAM files and reference-genome files are excluded from version control and can be regenerated using the provided metadata, scripts and environment specification.
+
+## Limitations
+
+The analysis contains five samples with an unbalanced 3:2 design. DESeq2 can model unequal replicate numbers, although the small number of infected samples limits statistical power and the biological conclusions that can be drawn from the two significant DEGs.
