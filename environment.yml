@@ -1,12 +1,27 @@
-name: rnaseq-qc
+name: rnaseq-analysis
+
 channels:
-  - bioconda
   - conda-forge
+  - bioconda
+
 dependencies:
+  # Core command-line tools
   - sra-tools
   - fastqc
   - fastp
   - multiqc
   - hisat2
   - samtools
+  - subread
+
+  # General utilities
   - wget
+  - git
+
+  # R
+  - r-base
+  - r-tidyverse
+  - r-pheatmap
+
+  # Bioconductor
+  - bioconductor-deseq2
