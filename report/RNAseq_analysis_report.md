@@ -124,7 +124,7 @@ The PCA indicated that PC1 explained 48% of variance and PC2 explained 29%, mean
 
 The samples did not show complete separation by experimental condition. This suggests that biological condition was an important but not exclusive source of variability and that additional biological or technical variation may be present.
 
-![Principal component analysis of VST-transformed expression data](figures/pca_plot.png)
+![Principal component analysis of VST-transformed expression data](../results/deseq2/plots/pca_plot.png)
 
 **Figure 1. Principal-component analysis of VST-transformed gene-expression data.**  
 Samples are coloured by experimental condition. PC1 explains 48% of variance, and PC2 explains 29%.
@@ -135,7 +135,7 @@ The MA plot showed that most genes had log2 fold-change estimates close to zero 
 
 This suggests that broad transcriptome-wide changes were limited under the analysed comparison and that only a small proportion of genes showed large expression differences.
 
-![MA plot](figures/ma_plot.png)
+![MA plot](../results/deseq2/plots/ma_plot.png)
 
 **Figure 2. MA plot for Day 4 Influenza A versus Day 0 non-infected cerebellum.**
 
@@ -143,7 +143,7 @@ This suggests that broad transcriptome-wide changes were limited under the analy
 
 The volcano plot showed only two genes that simultaneously met the adjusted p-value and absolute log2 fold-change thresholds. Both occurred on the positive fold-change side of the plot, consistent with upregulation in the infected group.
 
-![Volcano plot](figures/volcano_plot.png)
+![Volcano plot](../results/deseq2/plots/volcano_plot.png)
 
 **Figure 3. Volcano plot of differential expression.**  
 Significant genes are highlighted according to adjusted p-value < 0.05 and |log2FC| >= 1.
@@ -154,7 +154,7 @@ The heatmap of the two significant genes demonstrated higher relative expression
 
 The infected samples grouped together in the heatmap, although the overall five-sample clustering did not show complete condition-based separation. This is consistent with the PCA evidence of within-condition variability.
 
-![DEG heatmap](figures/heatmap.png)
+![DEG heatmap](../results/deseq2/plots/heatmap.png)
 
 **Figure 4. Heatmap of significant differentially expressed genes.**  
 Row-scaled VST expression values are shown for the two significant genes across the five samples.
