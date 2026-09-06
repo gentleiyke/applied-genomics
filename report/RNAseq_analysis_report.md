@@ -69,13 +69,9 @@ Assigned read counts were:
 
 A simplified gene-by-sample count matrix was generated for downstream statistical analysis.
 
-### 2.5 Differential-expression analysis
+### 2.5 Differential expression analysis
 
-Differential-expression analysis was conducted in R using DESeq2. Raw count data were combined with sample metadata using a design formula of:
-
-`~ Condition`
-
-The reference condition was Day 0 non-infected cerebellum, and the treatment condition was Day 4 Influenza A cerebellum.
+Differential expression was modelled using experimental condition as the design factor (design = `~ Condition`), with Day 0 non-infected cerebellum as the reference condition, and the treatment condition was Day 4 Influenza A cerebellum.
 
 Low-count genes were filtered prior to modelling. Significant differentially expressed genes were defined using:
 
