@@ -2,7 +2,7 @@
 
 ## Abstract
 
-This project implemented a reproducible RNA-sequencing workflow to investigate transcriptional differences between non-infected mouse cerebellum and cerebellum sampled following Influenza A infection. Five publicly available RNA-seq samples from NCBI GEO/SRA study GSE96870 were analysed, comprising three Day 0 non-infected controls and two Day 4 Influenza A-infected samples.
+This project implemented a reproducible RNA-sequencing workflow to investigate transcriptional differences between the non-infected mouse cerebellum and the cerebellum sampled after Influenza A infection. Five publicly available RNA-seq samples from NCBI GEO/SRA study GSE96870 were analysed, comprising three Day 0 non-infected controls and two Day 4 Influenza A-infected samples.
 
 The workflow included SRA data retrieval, sequence quality control, read preprocessing, reference-genome alignment, gene-level quantification and differential-expression analysis. Reads were aligned to the *Mus musculus* GRCm39 reference genome using HISAT2, and all five samples achieved overall alignment rates above 99%. Gene-level counts were generated using featureCounts with the Ensembl release 116 annotation. Following low-count filtering, 19,911 genes were tested using DESeq2. Two genes met the predefined significance threshold of adjusted p-value < 0.05 and absolute log2 fold change >= 1. Both significant genes were upregulated in Day 4 Influenza A samples, while no significant downregulated genes were detected.
 
@@ -10,7 +10,7 @@ The results demonstrate a detectable but limited transcriptional response under 
 
 ## 1. Introduction
 
-RNA sequencing provides transcriptome-wide measurement of gene expression and is widely used to investigate molecular responses to infection and other biological perturbations. Influenza A infection can induce host transcriptional responses involving antiviral defence, immune signalling and tissue-specific responses.
+RNA sequencing provides a transcriptome measurement of gene expression and is widely used to investigate molecular responses to infection and other biological perturbations. Influenza A infection can induce host transcriptional responses involving antiviral defence, immune signalling and tissue-specific responses.
 
 This project analysed publicly available RNA-seq data from GSE96870 to compare gene expression in mouse cerebellum between Day 0 non-infected controls and Day 4 Influenza A-infected samples.
 
@@ -27,7 +27,7 @@ Five *Mus musculus* cerebellum RNA-seq samples were analysed:
 | Day 0 non-infected cerebellum | SRR5364316, SRR5364317, SRR5364322 | 3 |
 | Day 4 Influenza A cerebellum | SRR5364318, SRR5364323 | 2 |
 
-The study therefore used an unbalanced 3:2 design. All five biological samples were retained because unequal replicate numbers can be modelled by DESeq2 and there was no analytical justification for excluding the additional control replicate.
+The study therefore used an unbalanced 3:2 design. All five biological samples were retained because DESeq2 can model unequal replicate numbers, and there was no analytical justification for excluding the additional control replicate.
 
 ### 2.2 Data acquisition and quality control
 
@@ -82,7 +82,7 @@ Low-count genes were filtered prior to modelling. Significant differentially exp
 - adjusted p-value < 0.05
 - absolute log2 fold change >= 1
 
-Variance-stabilising transformation was applied for visualisation and export of normalised expression values.
+A variance stabilising transformation was applied for visualisation and export of normalised expression values.
 
 PCA, MA, volcano and heatmap plots were generated to assess sample structure and differential-expression patterns.
 
@@ -128,8 +128,10 @@ The PCA indicated that PC1 explained 48% of variance and PC2 explained 29%, mean
 
 The samples did not show complete separation by experimental condition. This suggests that biological condition was an important but not exclusive source of variability and that additional biological or technical variation may be present.
 
+![Principal component analysis of VST-transformed expression data](figures/pca_plot.png)
+
 **Figure 1. Principal-component analysis of VST-transformed gene-expression data.**  
-Samples are coloured by experimental condition. PC1 explains 48% of variance and PC2 explains 29%.
+Samples are coloured by experimental condition. PC1 explains 48% of variance, and PC2 explains 29%.
 
 ### 3.5 MA plot
 
@@ -137,11 +139,15 @@ The MA plot showed that most genes had log2 fold-change estimates close to zero 
 
 This suggests that broad transcriptome-wide changes were limited under the analysed comparison and that only a small proportion of genes showed large expression differences.
 
+![MA plot](figures/ma_plot.png)
+
 **Figure 2. MA plot for Day 4 Influenza A versus Day 0 non-infected cerebellum.**
 
 ### 3.6 Volcano plot
 
 The volcano plot showed only two genes that simultaneously met the adjusted p-value and absolute log2 fold-change thresholds. Both occurred on the positive fold-change side of the plot, consistent with upregulation in the infected group.
+
+![Volcano plot](figures/volcano_plot.png)
 
 **Figure 3. Volcano plot of differential expression.**  
 Significant genes are highlighted according to adjusted p-value < 0.05 and |log2FC| >= 1.
@@ -151,6 +157,8 @@ Significant genes are highlighted according to adjusted p-value < 0.05 and |log2
 The heatmap of the two significant genes demonstrated higher relative expression in Day 4 Influenza A samples compared with Day 0 controls.
 
 The infected samples grouped together in the heatmap, although the overall five-sample clustering did not show complete condition-based separation. This is consistent with the PCA evidence of within-condition variability.
+
+![DEG heatmap](figures/heatmap.png)
 
 **Figure 4. Heatmap of significant differentially expressed genes.**  
 Row-scaled VST expression values are shown for the two significant genes across the five samples.
@@ -163,7 +171,7 @@ Only two of 19,911 tested genes satisfied both the adjusted p-value and fold-cha
 
 The restricted number of significant genes suggests that the detected transcriptional difference was relatively focused under the analysed conditions. However, it would be inappropriate to infer specific biological pathways from only two significant genes without first mapping the Ensembl identifiers to gene symbols and reviewing their established biological functions.
 
-The high alignment rates across all samples provide confidence that poor reference matching was not responsible for the limited number of significant DEGs. Similarly, substantial gene-assigned read counts were obtained for every sample.
+The high alignment rates across all samples support the conclusion that poor reference matching did not drive the limited number of significant DEGs. Similarly, substantial gene-assigned read counts were obtained for every sample.
 
 The PCA nevertheless indicates notable sample-level heterogeneity. Combined with the small sample size, this likely reduces statistical power for detecting more subtle transcriptional differences.
 
